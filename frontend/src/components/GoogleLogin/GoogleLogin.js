@@ -40,7 +40,7 @@ const Login = (props)=>{
                 buttonText="Login"
                 responseType="code"
                 redirectUri="postmessage"
-                scope="https://www.googleapis.com/auth/contacts.readonly"
+                scope="https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/calendar"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={'single_host_origin'}

@@ -18,7 +18,6 @@ exports.googleContacts = async (req, res, next) =>{
         return responseUtil.genericResponse(res, contacts);
 
     } catch (error) {
-        console.log(error)
         return responseUtil.genericResponse(res, null, messages.serverError, 'error', 500);
     }
 }

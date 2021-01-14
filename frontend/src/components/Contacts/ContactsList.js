@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import * as ContactService from '../../services/ContactService';
+import * as CalendarService from '../../services/CalenderService';
 import Message from '../Message';
 
 const ContactsList = (props)=>{
@@ -12,7 +13,6 @@ const ContactsList = (props)=>{
         const result = await ContactService.fetchGoogleContacts();
         const {status, message, data} = result;
         if (status=='success'){
-            console.log(contacts)
             setContacts(data)
         }
         else {
@@ -20,6 +20,21 @@ const ContactsList = (props)=>{
             setMessage(message);
         }
     },[])
+
+    const sendInvite = async (e)=>{
+
+        e.preventDefault();
+        const result = await CalendarService.sendGoogleInvite(e.target.id);
+        const {status, message, data} = result;
+        if (status=='success'){
+            setStatus(status);
+            setMessage(message);
+        }
+        else {
+            setStatus(status);
+            setMessage(message);
+        }
+    }
 
     return (
         <div>
@@ -37,15 +52,20 @@ const ContactsList = (props)=>{
                    </thead>
                    <tbody>
                    {
-                           contacts.map(function(contact){
-                                return (
-                                    <tr>
-                                        <td>{contact.name}</td>
-                                        <td>{contact.email}</td>
-                                    </tr>
-                                )
-                            })
-                       }
+                        contacts.map(function(contact){
+                            return (
+                                <tr id={contact.email}>
+                                    <td>{contact.name}</td>
+                                    <td>{contact.email}</td>
+                                    <td>
+                                        <button id={contact.email} onClick={sendInvite}>
+                                            Send Invite for next hour
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
                    </tbody>
                 </table> 
                 : null
