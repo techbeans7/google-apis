@@ -1,5 +1,4 @@
 const {google} = require('googleapis');
-const { content } = require('googleapis/build/src/apis/content');
 const calendar = google.calendar('v3')
 const moment = require( 'moment' );
 const config = require('../config/config');
@@ -48,7 +47,7 @@ exports.sendInvite = async (token, email) => {
               resolve(false);
             }
             else {
-                resolve(true);
+              resolve(true);
             }
         });
     })

@@ -18,15 +18,8 @@ exports.sendGoogleInvite = async (req, res, next) =>{
             return responseUtil.genericResponse(res, null, messages.inviteNotSent, 'error', 400);
 
         return responseUtil.genericResponse(res, email, messages.inviteSent);
-        // const contacts = await googleContacts.fetchContacts(token);
-        
-        // if  (!contacts)
-        //     return responseUtil.genericResponse(res, null, messages.dataNotAvailable, 'error', 404);
-
-        // return responseUtil.genericResponse(res, contacts);
 
     } catch (error) {
-        console.log(error)
         return responseUtil.genericResponse(res, null, messages.serverError, 'error', 500);
     }
 }
